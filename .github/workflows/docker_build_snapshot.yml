@@ -1,0 +1,35 @@
+# https://stackoverflow.com/questions/61388905/github-action-to-maven-build-followed-by-docker-build-push
+# https://zhuanlan.zhihu.com/p/90122357
+# 不支持 --- 分隔符
+
+name: Docker CI for snapshot
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build docker image and push
+        run: >-
+          sudo apt-get install -y maven;
+          export APP_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout)-snapshot-$(date +%Y%m%d);
+          docker login -u schrodingerfish -p ${{ secrets.DOCKER_CI_TOKEN }};
+          docker build . -f Dockerfile -t schrodingerfish/crack-dbeaver-password:${APP_VERSION} \
+            -t ghcr.io/schrodingerfish/crack-dbeaver-password:${APP_VERSION};
+          docker build . -f Dockerfile -t schrodingerfish/crack-dbeaver-password:latest-snapshot \
+            -t ghcr.io/schrodingerfish/crack-dbeaver-password:latest-snapshot;
+          docker push schrodingerfish/crack-dbeaver-password:${APP_VERSION};
+          docker push schrodingerfish/crack-dbeaver-password:latest-snapshot;
+          
+          docker login -u schrodingerfish -p ${{ secrets.DOCKER_CI_GITHUB_TOKEN }} ghcr.io;
+          docker push ghcr.io/schrodingerfish/crack-dbeaver-password:${APP_VERSION};
+          docker push ghcr.io/schrodingerfish/crack-dbeaver-password:latest-snapshot;
+
+# https://rhysd.github.io/actionlint/
+# https://wangchujiang.com/github-actions/
