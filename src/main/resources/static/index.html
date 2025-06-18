@@ -2,43 +2,266 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Dbeaver密码在线破解</title>
+  <title>DBeaver密码在线破解工具</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .header-title {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .header-title h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      font-weight: 300;
+    }
+    
+    .header-title p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin: 0;
+    }
+    
+    .layui-card {
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border: none;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.95);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+    
+    .layui-card-header {
+      background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      padding: 20px;
+      border-bottom: none;
+    }
+    
+    .layui-card-header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 500;
+    }
+    
+    .layui-card-body {
+      padding: 30px;
+    }
+    
+    .usage-steps {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 25px;
+      margin: 20px 0;
+    }
+    
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .step-number {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+    
+    .step-content {
+      flex: 1;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #333;
+    }
+    
+    .upload-section {
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      margin: 30px 0;
+    }
+    
+    .upload-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin: 30px 0;
+    }
+    
+    .upload-btn {
+      background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+      border: none;
+      border-radius: 50px;
+      padding: 15px 30px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      min-width: 200px;
+    }
+    
+    .upload-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+    }
+    
+    .upload-btn i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px;
+      color: white;
+      opacity: 0.8;
+    }
+    
+    .footer a {
+      color: #4facfe;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .footer a:hover {
+      color: #00f2fe;
+    }
+    
+    .example-image {
+      text-align: center;
+      margin: 30px 0;
+    }
+    
+    .example-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      border: 3px solid #ddd;
+    }
+    
+    @media (max-width: 768px) {
+      .header-title h1 {
+        font-size: 2rem;
+      }
+      
+      .upload-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .step-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .step-number {
+        margin-bottom: 10px;
+        margin-right: 0;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div style="padding: 20px; background-color: #FAFAFA;">
-  <div class="layui-card" align="left">
-    <div class="layui-card-header"><h1>用法</h1></div>
-    <div class="layui-card-body" >
-      <h3 style="text-align: left">
-        1、在我的电脑中找到这个密码文件的位置 “credentials-config.json”，然后上传该文件，此时会获取到所有密码信息，包含密码、用户名、连接地址等信息。<br/>
-        2、再上传这个文件：“data-sources.json”，即可获取连接汉字名及数据库连接配置（含密码）在线解密。
-      </h3>
+<div class="main-container">
+  <!-- 页面标题 -->
+  <div class="header-title">
+    <h1><i class="fas fa-database"></i> DBeaver密码破解工具</h1>
+    <p>安全、快速、在线解密您的DBeaver数据库连接密码</p>
+  </div>
+
+  <!-- 使用说明卡片 -->
+  <div class="layui-card">
+    <div class="layui-card-header">
+      <h1><i class="fas fa-info-circle"></i> 使用说明</h1>
     </div>
-    <div align="left">
-      <img src="example-1.png" border="3"/>
+    <div class="layui-card-body">
+      <div class="usage-steps">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            在您的电脑中找到DBeaver密码文件 <code>"credentials-config.json"</code>，上传该文件后即可获取所有密码信息，包含密码、用户名、连接地址等详细信息。
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            上传数据源配置文件 <code>"data-sources.json"</code>，获取连接名称及完整的数据库连接配置信息（包含解密后的密码）。
+          </div>
+        </div>
+      </div>
+      
+      <div class="example-image">
+        <img src="example-1.png" alt="使用示例" />
+      </div>
     </div>
   </div>
-</div>
 
-<hr/>
-<p align="center">
-  <button type="button" class="layui-btn" id="test3" align="center">
-    <i class="layui-icon"></i>上传密码文件
-  </button>
-  <button type="button" class="layui-btn" id="test4" align="center">
-    <i class="layui-icon"></i>上传资源文件
-  </button>
-</p>
-<hr/>
-<p align="center">
-  <a href="https://github.com/schrodingerfish/crack-dbeaver-password" target="_blank">powered by
-    schrodingerfish</a>
-</p>
+  <!-- 文件上传区域 -->
+  <div class="upload-section">
+    <h2 style="color: white; margin-bottom: 30px;"><i class="fas fa-cloud-upload-alt"></i> 文件上传</h2>
+    <div class="upload-buttons">
+      <button type="button" class="upload-btn" id="test3">
+        <i class="fas fa-key"></i>上传密码文件
+      </button>
+      <button type="button" class="upload-btn" id="test4">
+        <i class="fas fa-database"></i>上传资源文件
+      </button>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer">
+    <p>
+      <i class="fas fa-code"></i> 
+      <a href="https://github.com/schrodingerfish/crack-dbeaver-password" target="_blank">
+        Powered by schrodingerfish
+      </a>
+      <i class="fab fa-github" style="margin-left: 10px;"></i>
+    </p>
+  </div>
+</div>
 
 <script src="https://www.layuicdn.com/layui/layui.js" charset="utf-8"></script>
 <script>
